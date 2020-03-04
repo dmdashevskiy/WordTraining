@@ -23,7 +23,7 @@ public class Trainer {
 	
 	public boolean tackFormatValid(String inputString) {
 		
-		Pattern formatPattern = Pattern.compile(".");
+		Pattern formatPattern = Pattern.compile("^.+?%(.+?#)*.+?%$");
 		Matcher formatMatcher = formatPattern.matcher(inputString);
 		
 		return formatMatcher.matches();		

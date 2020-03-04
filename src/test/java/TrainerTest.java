@@ -8,13 +8,16 @@ public class TrainerTest {
 	public void testTackFormatValid() {
 		Trainer trainer = new Trainer();
 		
-		assertFalse((trainer.tackFormatValid("")));
-		assertFalse((trainer.tackFormatValid("%")));
-		assertFalse((trainer.tackFormatValid("%%")));
-		assertFalse((trainer.tackFormatValid(" % %")));
-		assertFalse((trainer.tackFormatValid("1% %")));
-		assertFalse((trainer.tackFormatValid("% 1%")));
+		assertFalse(trainer.tackFormatValid(""));
+		assertFalse(trainer.tackFormatValid("%"));
+		assertFalse(trainer.tackFormatValid("%%"));		
+		assertFalse(trainer.tackFormatValid("1#1%"));	
+		
+		assertTrue(trainer.tackFormatValid("1%1%"));
+		assertTrue(trainer.tackFormatValid("1%1#1%"));
+		assertTrue(trainer.tackFormatValid("1%1#1#1%"));
 				
 	}
 
 }
+
