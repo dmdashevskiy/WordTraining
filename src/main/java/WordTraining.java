@@ -14,7 +14,7 @@ public class WordTraining {
 			inputString = skaner.nextLine();						
 			if(inputString.equals("halt")) break;
 			if(inputString.equals("help")) {
-				showHelp(); 				//shows command help
+				showHelp(); 										//shows command help
 				continue;
 			}
 //			if(inputString.equals("training")) {					//starts training process		
@@ -24,10 +24,10 @@ public class WordTraining {
 //			};
 //			if(inputString.equals("addwords")) {					//starts words adding process
 //				Trainer repeatingTrainer = new RepitingTrainer;
-//				repeatingTrainer.addWords();
+//				repeatingTrainer.addTack();
 //				continue;
 //			};
-			System.out.println("y. Don't know this command. Try 'help' for... help");
+			System.out.println("Sorry. Don't know this command. Try 'help' for... help");
 		}
 		skaner.close();
 	}
