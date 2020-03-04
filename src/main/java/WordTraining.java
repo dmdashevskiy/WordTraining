@@ -12,17 +12,30 @@ public class WordTraining {
 		
 		while (true) {			
 			inputString = skaner.nextLine();						
-			if(inputString.equals("Q")) break;
-//			if(inputString.equals("help")) showHelp(); 				//shows command help
+			if(inputString.equals("halt")) break;
+			if(inputString.equals("help")) {
+				showHelp(); 				//shows command help
+				continue;
+			}
 //			if(inputString.equals("training")) {					//starts training process		
 //				Trainer repeatingTrainer = new RepitingTrainer;
 //				repeatingTrainer.train();
+//				continue;
 //			};
 //			if(inputString.equals("addwords")) {					//starts words adding process
 //				Trainer repeatingTrainer = new RepitingTrainer;
 //				repeatingTrainer.addWords();
+//				continue;
 //			};
+			System.out.println("y. Don't know this command. Try 'help' for... help");
 		}
 		skaner.close();
 	}
+	
+	private static void showHelp() {
+		System.out.println("halt - exit the program");
+		System.out.println("help - shows help");
+		System.out.println("training - start repeating training");
+		System.out.println("addwords - add words for repeating training");
+	}	
 }
