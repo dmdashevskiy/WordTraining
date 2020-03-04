@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Trainer {
@@ -14,19 +13,11 @@ public class Trainer {
 			System.out.println("question% answer1# answer...# answerX%");
 			inputString = skaner.nextLine();						
 			if (inputString.equals("S")) break;
-			if (tackFormatValid(inputString) == false) { 
+			if (!Pattern.matches("^.+?%(.+?#)*.+?%$", inputString )) { 
 				System.out.println("Wrong task format");
 			}	
 		}	
 		skaner.close();
-	}
-	
-	public boolean tackFormatValid(String inputString) {
-		
-		Pattern formatPattern = Pattern.compile("^.+?%(.+?#)*.+?%$");
-		Matcher formatMatcher = formatPattern.matcher(inputString);
-		
-		return formatMatcher.matches();		
 	}
 	
 }	
