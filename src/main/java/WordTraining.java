@@ -4,8 +4,7 @@ public class WordTraining {
 
 	public static void main(String[] args) {
 		
-		System.out.println("WordTraining program");
-		System.out.println("Waiting for commands. For help type 'help'.");
+		showGreatings();
 		
 		Scanner skaner = new Scanner(System.in);
 		String inputString;
@@ -22,17 +21,21 @@ public class WordTraining {
 //				repeatingTrainer.train();
 //				continue;
 //			};
-//			if(inputString.equals("addwords")) {					//starts words adding process
-//				Trainer repeatingTrainer = new RepitingTrainer;
-//				repeatingTrainer.addTack();
-//				continue;
-//			};
+			if(inputString.equals("addwords")) {					//starts words adding process
+				Trainer.addTackTroughConsole();
+				continue;
+			};
 			System.out.println("Sorry. Don't know this command. Try 'help' for... help");
 		}
 		skaner.close();
 	}
+
+	private static void showGreatings() {
+		System.out.println("WordTraining program");
+		System.out.println("Waiting for commands. For help type 'help'.");
+	}
 	
-	private static void showHelp() {
+	private static void showHelp() {		
 		System.out.println("halt - exit the program");
 		System.out.println("help - shows help");
 		System.out.println("training - start repeating training");

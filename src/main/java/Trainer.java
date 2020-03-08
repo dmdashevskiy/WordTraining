@@ -1,9 +1,9 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Trainer {
+public abstract class Trainer {
 
-	public void addtack() {
+	public static void addTackTroughConsole() {
 		
 		Scanner skaner = new Scanner(System.in);
 		String inputString;	
@@ -15,11 +15,15 @@ public class Trainer {
 			if (inputString.equals("S")) break;
 			if (!Pattern.matches("^.+?%(.+?#)*.+?%$", inputString )) { 
 				System.out.println("Wrong task format");
-			}	
+			}
+			//addTack(findOrCreateTack(inputString));
 		}	
-		skaner.close();
-	}
+		skaner.close();		
+	}	
 	
+	public static void addTack(TackElement TackElement) {
+		
+	}
 }	
 
 
