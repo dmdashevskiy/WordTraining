@@ -10,10 +10,10 @@ public abstract class Trainer {
 		
 		while (true) {			
 			System.out.println("Enter a task in the following format or stop(S)");
-			System.out.println("question% answer1# answer...# answerX%");
+			System.out.println("question% answer# optional answer# optional answer#");
 			inputString = skaner.nextLine();						
 			if (inputString.equals("S")) break;
-			if (!Pattern.matches("^.+?%(.+?#)*.+?%$", inputString )) { 
+			if (!Pattern.matches("^.+?%.+?#", inputString )) { 
 				System.out.println("Wrong task format");
 			}
 			//addTack(findOrCreateTack(inputString));
@@ -21,7 +21,7 @@ public abstract class Trainer {
 		skaner.close();		
 	}	
 	
-	public static void addTack(TackElement TackElement) {
+	public static void addTack(TaskObject TackElement) {
 		
 	}
 }	
