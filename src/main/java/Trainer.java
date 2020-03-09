@@ -16,7 +16,7 @@ public abstract class Trainer {
 			if (!Pattern.matches("^.+?%.+?#", inputString )) { 
 				System.out.println("Wrong task format");
 			}
-			//addTack(findOrCreateTack(inputString));
+			TaskObject taskObject = new TaskObject(inputString);
 		}	
 		skaner.close();		
 	}	

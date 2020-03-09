@@ -32,9 +32,9 @@ public class TaskObject {
 	private void saveObjectInDatabase() {
 		
 		
-		Class.forName ("org.h2.Driver");
-		Connection connectionDatabse = DriverManager.getConnection ("jdbc:h2:D:\\Eclipse workspace\\WordTraining\\src\\main\\resources/TackBase", "sa","123654");
-		connectionDatabse.createStatement();
+//		Class.forName ("org.h2.Driver");
+//		Connection connectionDatabse = DriverManager.getConnection ("jdbc:h2:D:\\Eclipse workspace\\WordTraining\\src\\main\\resources/TackBase", "sa","123654");
+//		connectionDatabse.createStatement();
 		
 		
 	}

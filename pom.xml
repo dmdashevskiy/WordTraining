@@ -4,7 +4,25 @@
   <artifactId>WordTraining</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>WordsTraining</name>
-  <description>This is a program for word training witch lets you to pick words for training and then trains you in the most sadistic way. Enjoy!</description>
+  <description>This is a program for word training whitch lets you to pick words for training and then trains you in the most sadistic way. Enjoy!</description>
+	
+	<build>
+	   <plugins>
+	     <plugin>
+	       <groupId>org.apache.maven.plugins</groupId>
+	       <artifactId>maven-jar-plugin</artifactId>	       
+	       <configuration>
+	         <archive>
+	           <manifest>
+	             <addClasspath>true</addClasspath>
+	             <mainClass>WordTraining</mainClass>
+	           </manifest>
+	         </archive>
+	       </configuration>	       
+	     </plugin>
+	   </plugins>
+	 </build>	
+	
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
@@ -19,7 +37,9 @@
 	    <scope>test</scope>
 	</dependency>
   </dependencies>
+  
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  </properties> 
+
 </project>
