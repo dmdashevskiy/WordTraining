@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+import taskObj.TaskObject;
+import trainers.DailyTrainer;
+import trainers.Trainer;
+
 public class WordTraining {
 
 	public static void main(String[] args) {
@@ -16,13 +20,13 @@ public class WordTraining {
 				showHelp(); 										//shows command help
 				continue;
 			}
-//			if(inputString.equals("training")) {					//starts training process		
-//				Trainer repeatingTrainer = new RepitingTrainer;
-//				repeatingTrainer.train();
-//				continue;
-//			};
-			if(inputString.equals("addwords")) {					//starts words adding process
-				Trainer.addTackTroughConsole();
+			if(inputString.equals("training")) {					//starts training process		
+				Trainer dailyTrainer = new DailyTrainer();
+				dailyTrainer.trainMe();
+				continue;
+			};
+			if(inputString.equals("addtasks")) {					//starts words adding process
+				TaskObject.addTasksTroughConsole();
 				continue;
 			};
 			System.out.println("Sorry. Don't know this command. Try 'help' for... help");
@@ -39,6 +43,6 @@ public class WordTraining {
 		System.out.println("halt - exit the program");
 		System.out.println("help - shows help");
 		System.out.println("training - start repeating training");
-		System.out.println("addwords - add words for repeating training");
+		System.out.println("addtasks - add words for repeating training");
 	}	
 }

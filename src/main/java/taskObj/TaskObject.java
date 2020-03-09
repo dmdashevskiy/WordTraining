@@ -1,5 +1,8 @@
+package taskObj;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.sql.*;
 
 public class TaskObject {
@@ -34,31 +37,35 @@ public class TaskObject {
 		PreparedStatement insertObject = null;
 		Connection connectionDatabse = null;
 		
-		String insertString =   "insert into TASK  SET" + 
-								"QUESTION = ?," + 
-								"ANSWER0 = ?," + 
-								"ANSWER1 = ?," + 
-								"ANSWER2 = ?," + 
-								"REPEAT_NUMBER = ?," + 
-								"LAST_REPEAT = ?," + 
+		String insertString =   "insert into TASK  SET " + 
+								"QUESTION = ?, " + 
+								"ANSWER0 = ?, " + 
+								"ANSWER1 = ?, " + 
+								"ANSWER2 = ?, " + 
+								"REPEAT_NUMBER = ?, " + 
+								"LAST_REPEAT = ?, " + 
 								"NEXT_REPEAT = ?;";	
 		
 		try {
 			Class.forName ("org.h2.Driver");
-			connectionDatabse = DriverManager.getConnection (this.getClass().getResource("TañkBase.mv.db").getPath(), "sa","123654");
+			connectionDatabse = DriverManager.getConnection ("jdbc:h2:~/TaskBase", "sa","123654");
 			insertObject = connectionDatabse.prepareStatement(insertString);
 			insertObject.setString(1, this.question);
 			insertObject.setString(2, this.answer0);
 			insertObject.setString(3, this.answer1);
 			insertObject.setString(4, this.answer2);
 			insertObject.setInt(5, REPEAT_NUMBER);
-			insertObject.setDate(5, new java.sql.Date(0));;
-			insertObject.setDate(6, new java.sql.Date(this.nextRepeat.getTimeInMillis()));	
-			insertObject.executeUpdate();			
+			insertObject.setDate(6, new java.sql.Date(0));;
+			insertObject.setDate(7, new java.sql.Date(this.nextRepeat.getTimeInMillis()));	
+			insertObject.executeUpdate();	
+			
+			System.out.println("Task was added");
 
 		} catch (ClassNotFoundException e) {			
+			System.out.println("Task wasn't added");
 			e.printStackTrace();			
 		} catch (SQLException e) {	       
+			System.out.println("Task wasn't added");
 			e.printStackTrace();			
 		}
 		finally {
@@ -72,14 +79,31 @@ public class TaskObject {
 			if (connectionDatabse != null) {
 				try {
 					connectionDatabse.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+				} catch (SQLException e) {					
 					e.printStackTrace();
 				}				
 			}
 			
 		}		
 		
+	}
+
+	public static void addTasksTroughConsole() {
+		
+		Scanner skaner = new Scanner(System.in);
+		String inputString;	
+		
+		while (true) {			
+			System.out.println("Enter a task in the following format or stop(S)");
+			System.out.println("question% answer# optional answer# optional answer#");
+			inputString = skaner.nextLine();						
+			if (inputString.equals("S")) break;
+			if (!Pattern.matches("^.+?%.+?#", inputString )) { 
+				System.out.println("Wrong task format");
+			}
+			new TaskObject(inputString);
+		}	
+		skaner.close();		
 	}
 
 	public static String[] parseStringRepresentation(String stringRepresentation) {
@@ -95,11 +119,5 @@ public class TaskObject {
 		
 		return returnArray;
 	}
-	
-	
-	
-	
-	
-
 
 }

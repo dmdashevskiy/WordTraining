@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import taskObj.TaskObject;
+
 public class ParseTest {
 
 	@Test
