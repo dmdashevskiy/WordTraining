@@ -8,12 +8,11 @@ public class WordTraining {
 
 	public static void main(String[] args) {
 		
+		Scanner skaner = new Scanner(System.in);
+		String inputString;		
 		showGreatings();
 		
-		Scanner skaner = new Scanner(System.in);
-		String inputString;
-		
-		while (true) {			
+		while (true) {						
 			inputString = skaner.nextLine();						
 			if(inputString.equals("halt")) break;
 			if(inputString.equals("help")) {
@@ -23,13 +22,13 @@ public class WordTraining {
 			if(inputString.equals("training")) {					//starts training process		
 				Trainer dailyTrainer = new DailyTrainer();
 				dailyTrainer.trainMe();
-				continue;
+				break;
 			};
 			if(inputString.equals("addtasks")) {					//starts words adding process
 				TaskObject.addTasksTroughConsole();
-				continue;
+				break;
 			};
-			System.out.println("Sorry. Don't know this command. Try 'help' for... help");
+			System.out.println("Sorry. Don't know this command. Try 'help' for... help");			
 		}
 		skaner.close();
 	}
