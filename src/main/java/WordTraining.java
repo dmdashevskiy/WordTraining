@@ -24,7 +24,7 @@ public class WordTraining {
 				dailyTrainer.trainMe();
 				break;
 			};
-			if(inputString.equals("addtasks")) {					//starts words adding process
+			if(inputString.equals("addtasks")) {					 //starts words adding process
 				TaskObject.addTasksTroughConsole();
 				break;
 			};
