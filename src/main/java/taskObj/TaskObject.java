@@ -227,6 +227,7 @@ public class TaskObject {
 	
 	public static void addTasksTroughConsole() {
 		
+		@SuppressWarnings("resource")
 		Scanner skaner = new Scanner(System.in);
 		String inputString;	
 		
@@ -239,8 +240,7 @@ public class TaskObject {
 				System.out.println("Wrong task format");
 			}
 			new TaskObject(inputString);
-		}	
-		skaner.close();		
+		}			
 	}
 
 	public static String[] parseStringRepresentation(String stringRepresentation) {

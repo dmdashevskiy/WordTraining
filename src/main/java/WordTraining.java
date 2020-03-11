@@ -22,11 +22,13 @@ public class WordTraining {
 			if(inputString.equals("training")) {					//starts training process		
 				Trainer dailyTrainer = new DailyTrainer();
 				dailyTrainer.trainMe();
-				break;
+				showHelp();
+				continue;
 			};
 			if(inputString.equals("addtasks")) {					 //starts words adding process
 				TaskObject.addTasksTroughConsole();
-				break;
+				showGreatings();
+				continue;
 			};
 			System.out.println("Sorry. Don't know this command. Try 'help' for... help");			
 		}

@@ -96,6 +96,7 @@ public class DailyTrainer extends Trainer {
 	@Override
 	public void trainMe() {	
 		
+		@SuppressWarnings("resource")
 		Scanner skaner = new Scanner(System.in);
 		String inputString;		
 		
@@ -107,8 +108,7 @@ public class DailyTrainer extends Trainer {
 				System.out.println("Answer the question. Or (D)elete question. Or (S)top this hell.");			
 				taskObject.askQuestionTroughConsole();
 				inputString = skaner.nextLine();
-				if (inputString.contentEquals("S")) {
-					skaner.close();
+				if (inputString.contentEquals("S")) {					
 					return;				
 				}
 				if (inputString.contentEquals("D")) {
@@ -132,8 +132,6 @@ public class DailyTrainer extends Trainer {
 				}			
 			}			
 			getTasksForTrainng(tasksForTraining);
-		}
-		skaner.close();		
+		}				
 	}
-
 }
