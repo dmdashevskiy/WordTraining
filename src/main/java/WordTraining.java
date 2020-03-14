@@ -14,7 +14,7 @@ public class WordTraining {
 		
 		while (true) {						
 			inputString = skaner.nextLine();						
-			if(inputString.equals("halt")) break;
+			if(inputString.equals("quit")) break;
 			if(inputString.equals("help")) {
 				showHelp(); 										//shows command help
 				continue;
@@ -22,7 +22,7 @@ public class WordTraining {
 			if(inputString.equals("training")) {					//starts training process		
 				Trainer dailyTrainer = new DailyTrainer();
 				dailyTrainer.trainMe();
-				showHelp();
+				showGreatings();
 				continue;
 			};
 			if(inputString.equals("addtasks")) {					 //starts words adding process
@@ -41,7 +41,7 @@ public class WordTraining {
 	}
 	
 	private static void showHelp() {		
-		System.out.println("halt - exit the program");
+		System.out.println("quit - exit the program");
 		System.out.println("help - shows help");
 		System.out.println("training - start repeating training");
 		System.out.println("addtasks - add words for repeating training");
