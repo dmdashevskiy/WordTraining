@@ -1,4 +1,5 @@
 package taskObj;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -340,6 +341,78 @@ public class TaskObject {
 			System.out.println("Done!");
 			break;
 		}	
+		
+	}
+
+
+	public static void getTasksForTrainng(ArrayList<TaskObject> tasksForTraining) {
+		
+				
+		Calendar today = Calendar.getInstance();		
+		ResultSet resSet = null; 
+		PreparedStatement selectObject = null;
+		Connection connectionDatabse = null;		
+		
+		today.set(Calendar.HOUR_OF_DAY, 23);
+		today.set(Calendar.MINUTE, 59);
+		today.set(Calendar.SECOND, 59);
+		today.set(Calendar.MILLISECOND, 0);
+		
+		tasksForTraining.clear();
+		
+		String selectionString = 	"select * " + 
+									"from  TASK " + 
+									"where NEXT_REPEAT <= ?;";  
+		
+		try {
+			Class.forName ("org.h2.Driver");
+			connectionDatabse = DriverManager.getConnection ("jdbc:h2:~/TaskBase", "sa","123654");
+			selectObject = connectionDatabse.prepareStatement(selectionString);
+			selectObject.setDate(1, new java.sql.Date(today.getTimeInMillis()));	
+			resSet = selectObject.executeQuery();
+			
+			while (resSet.next()) {
+				TaskObject readTask = new TaskObject();
+				readTask.setID(resSet.getInt("ID"));
+				readTask.setQuestion(resSet.getString("QUESTION"));
+				readTask.setAnswer0(resSet.getString("ANSWER0"));
+				readTask.setAnswer1(resSet.getString("ANSWER1"));
+				readTask.setAnswer2(resSet.getString("ANSWER2"));
+				readTask.setNumberOfRepeats(resSet.getInt("REPEAT_NUMBER"));
+				readTask.setNextRepeat(resSet.getDate("NEXT_REPEAT"));
+				
+				tasksForTraining.add(readTask);				
+			}
+			
+	
+		} catch (ClassNotFoundException e) {			
+			e.printStackTrace();			
+		} catch (SQLException e) {	       
+			e.printStackTrace();			
+		} finally {
+			if (resSet != null) {
+				try {
+					resSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+			if (selectObject != null) {
+				try {
+					selectObject.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}				
+			}			
+			if (connectionDatabse != null) {
+				try {
+					connectionDatabse.close();
+				} catch (SQLException e) {					
+					e.printStackTrace();
+				}				
+			}
+			
+		}		
 		
 	}
 	
