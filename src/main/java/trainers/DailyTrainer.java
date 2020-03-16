@@ -105,14 +105,18 @@ public class DailyTrainer extends Trainer {
 		
 			
 			for (TaskObject taskObject : tasksForTraining) {			
-				System.out.println("Answer the question. Or (D)elete question. Or (S)top this hell.");			
+				System.out.println("Answer the question. (D)elete question, or (C)hange it. Or (S)top.");			
 				taskObject.askQuestionTroughConsole();
 				inputString = skaner.nextLine();
 				if (inputString.contentEquals("S")) {					
 					return;				
 				}
 				if (inputString.contentEquals("D")) {
-					taskObject.deleteObjectFromDatabase();
+					taskObject.deleteObjectFromDatabase(false);
+					continue;
+				}
+				if (inputString.contentEquals("C")) {
+					taskObject.changeQuestion();
 					continue;
 				}
 				if (inputString.isEmpty()) {

@@ -26,7 +26,7 @@ public class WordTraining {
 				continue;
 			};
 			if(inputString.equals("addtasks")) {					 //starts words adding process
-				TaskObject.addTasksTroughConsole();
+				TaskObject.addTasksTroughConsole(true);
 				showGreatings();
 				continue;
 			};

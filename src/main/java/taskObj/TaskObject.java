@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 public class TaskObject {
 	
+	public static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
 	final Integer MAX_REPEATS = 5;	
 	Integer ID;
 	Integer numberOfRepeats = 0;	
@@ -185,7 +186,7 @@ public class TaskObject {
 		
 	}
 
-	public void deleteObjectFromDatabase() {
+	public void deleteObjectFromDatabase(boolean silentInConsole) {
 		
 		PreparedStatement deleteObject = null;
 		Connection connectionDatabse = null;
@@ -225,21 +226,26 @@ public class TaskObject {
 		
 	}
 	
-	public static void addTasksTroughConsole() {
+	public static void addTasksTroughConsole(boolean needsTextInstruction) {
 		
 		@SuppressWarnings("resource")
 		Scanner skaner = new Scanner(System.in);
-		String inputString;	
+		String inputString;
 		
-		while (true) {			
+		if (needsTextInstruction) {
 			System.out.println("Enter a task in the following format or stop(S)");
 			System.out.println("question? answer! optional answer! optional answer!");
+		}	
+		
+		while (true) {			
 			inputString = skaner.nextLine();						
 			if (inputString.equals("S")) break;
-			if (!Pattern.matches("^.+?\\?.+?\\!", inputString )) { 
+			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
 				System.out.println("Wrong task format");
+				continue;
 			}
 			new TaskObject(inputString);
+			System.out.println("Done!");
 		}			
 	}
 
@@ -296,7 +302,7 @@ public class TaskObject {
 		}
 				
 		if (numberOfRepeats > MAX_REPEATS) {
-			deleteObjectFromDatabase();
+			deleteObjectFromDatabase(false);
 			return;
 		}
 		
@@ -308,6 +314,33 @@ public class TaskObject {
 
 	public void showAnswers() {
 		System.out.println("Correct answers is: " + answer0 + " " + answer1 + " " + answer2);		
+	}
+
+
+	public void changeQuestion() {
+
+		System.out.println("The current instance of question is presented below, thus you can copy and redact it. Or (S)top redacting.");
+		System.out.println(question + "? " + answer0  + "!"
+										   + (answer1.isEmpty() ? "" : " " + answer1 + "!")
+										   + (answer2.isEmpty() ? "" : " " + answer2 + "!"));			
+		
+		@SuppressWarnings("resource")
+		Scanner skaner = new Scanner(System.in);
+		String inputString;
+		
+		while (true) {			
+			inputString = skaner.nextLine();						
+			if (inputString.equals("S")) break;
+			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
+				System.out.println("Wrong task format");
+				continue;
+			}
+			new TaskObject(inputString);
+			this.deleteObjectFromDatabase(true);
+			System.out.println("Done!");
+			break;
+		}	
+		
 	}
 	
 }
