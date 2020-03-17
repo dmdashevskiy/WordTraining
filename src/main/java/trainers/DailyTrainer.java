@@ -1,6 +1,7 @@
 package trainers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import taskObj.TaskObject;
@@ -26,6 +27,7 @@ public class DailyTrainer extends Trainer {
 		
 		while (tasksForTraining.isEmpty() == false) {
 		
+			Collections.shuffle(tasksForTraining);
 			
 			for (TaskObject taskObject : tasksForTraining) {			
 				System.out.println("Answer the question. (D)elete question, or (C)hange it. Or (S)top.");			
