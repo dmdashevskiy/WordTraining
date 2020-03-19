@@ -3,23 +3,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
-public class TaskObject {
-	
+public abstract class TaskObject {
+		
 	public static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
+	public static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
 	private final Integer MAX_REPEATS = 5;	
-	private Integer ID;
-	private Integer numberOfRepeats = 0;	
-	
-	private String question;
-	private String answer0;
-	private String answer1;
-	private String answer2;	
-	private Calendar nextRepeat;
+	protected Integer ID;
+	protected Integer numberOfRepeats = 0;	
+	protected String question;
+	protected String answer0;
+	protected String answer1;
+	protected String answer2;	
+	protected Calendar nextRepeat;
 	
 	private void setID(Integer iD) {
 		this.ID = iD;
@@ -70,7 +68,9 @@ public class TaskObject {
 
 	}
 
-	private void saveObjectInDatabaseWithNewID() {
+	public abstract void changeQuestion();
+	
+	protected void saveObjectInDatabaseWithNewID() {
 		
 		PreparedStatement insertObject = null;
 		Connection connectionDatabse = null;
@@ -215,32 +215,10 @@ public class TaskObject {
 			
 		}		
 		
-	}
-	
-	public static void addTasksTroughConsole(boolean needsTextInstruction) {
-		
-		@SuppressWarnings("resource")
-		Scanner skaner = new Scanner(System.in);
-		String inputString;
-		
-		if (needsTextInstruction) {
-			System.out.println("Enter a task in the following format or stop(S)");
-			System.out.println("question? answer! optional answer! optional answer!");
-		}	
-		
-		while (true) {			
-			inputString = skaner.nextLine();						
-			if (inputString.equals("S")) break;
-			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
-				System.out.println("Wrong task format");
-				continue;
-			}
-			new TaskObject(inputString);
-			System.out.println("Done!");
-		}			
-	}
+	}	
 
-	private static String[] parseStringRepresentation(String stringRepresentation) {
+
+	public static String[] parseStringRepresentation(String stringRepresentation) {
 				
 		String[] returnArray = new String[4];
 		Arrays.fill(returnArray, "");
@@ -302,32 +280,6 @@ public class TaskObject {
 		System.out.println("Correct answers is: " + answer0 + " " + answer1 + " " + answer2);		
 	}
 
-	public void changeQuestion() {
-
-		System.out.println("The current instance of question is presented below, thus you can copy and redact it. Or (S)top redacting.");
-		System.out.println(question + "? " + answer0  + "!"
-										   + (answer1.isEmpty() ? "" : " " + answer1 + "!")
-										   + (answer2.isEmpty() ? "" : " " + answer2 + "!"));			
-		
-		@SuppressWarnings("resource")
-		Scanner skaner = new Scanner(System.in);
-		String inputString;
-		
-		while (true) {			
-			inputString = skaner.nextLine();						
-			if (inputString.equals("S")) break;
-			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
-				System.out.println("Wrong task format");
-				continue;
-			}
-			new TaskObject(inputString);
-			this.deleteObjectFromDatabase(true);
-			System.out.println("Done!");
-			break;
-		}	
-		
-	}
-
 	public static void getTasksForTrainng(ArrayList<TaskObject> tasksForTraining) {
 		
 				
@@ -355,7 +307,7 @@ public class TaskObject {
 			resSet = selectObject.executeQuery();
 			
 			while (resSet.next()) {
-				TaskObject readTask = new TaskObject();
+				TaskObject readTask = new TaskObjectOpenQuestion();
 				readTask.setID(resSet.getInt("ID"));
 				readTask.setQuestion(resSet.getString("QUESTION"));
 				readTask.setAnswer0(resSet.getString("ANSWER0"));

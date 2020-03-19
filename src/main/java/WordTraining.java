@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-import taskObj.TaskObject;
 import taskObj.TaskObjectOpenQuestion;
+import taskObj.TaskObjectVariantQuestion;
 import trainers.DailyTrainer;
 import trainers.Trainer;
 
@@ -26,8 +26,13 @@ public class WordTraining {
 				showGreatings();
 				continue;
 			};
-			if(inputString.equals("addtasks")) {					 //starts words adding process
+			if(inputString.equals("addoq")) {					 //starts words adding process
 				TaskObjectOpenQuestion.addTasksTroughConsole(true);
+				showGreatings();
+				continue;
+			};
+			if(inputString.equals("addoq")) {					 //starts words adding process
+				TaskObjectVariantQuestion.addTasksTroughConsole(true);
 				showGreatings();
 				continue;
 			};
@@ -45,6 +50,7 @@ public class WordTraining {
 		System.out.println("quit - exit the program");
 		System.out.println("help - shows help");
 		System.out.println("training - start repeating training");
-		System.out.println("addtasks - add words for repeating training");
+		System.out.println("addoq - add open question tasks");
+		System.out.println("addvq - add variant question tasks");
 	}	
 }
