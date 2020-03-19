@@ -5,10 +5,11 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class TaskObjectOpenQuestion extends TaskObject {
-
-	public TaskObjectOpenQuestion(String stringRepresentation) { //creates taskObject from parsed stringRepresentation and saves it into the database
+public class TaskObjectVariantQuestion extends TaskObject {
+	
+	public TaskObjectVariantQuestion(String stringRepresentation) { //creates taskObject from parsed stringRepresentation and saves it into the database
 		
+		//TODO rebuild
 		String[] stringArray = parseStringRepresentation(stringRepresentation);		
 		this.question = stringArray[0];
 		this.answer0 = stringArray[1];
@@ -24,9 +25,6 @@ public class TaskObjectOpenQuestion extends TaskObject {
 
 	}
 	
-	public TaskObjectOpenQuestion() {
-		}
-
 	public static void addTasksTroughConsole(boolean needsTextInstruction) {
 		
 		@SuppressWarnings("resource")
@@ -45,13 +43,15 @@ public class TaskObjectOpenQuestion extends TaskObject {
 				System.out.println("Wrong task format");
 				continue;
 			}
-			new TaskObjectOpenQuestion(inputString);
+			new TaskObjectVariantQuestion(inputString);
 			System.out.println("Done!");
 		}			
 	}
 
 	public void changeQuestion() {
 	
+		//TODO rebuild
+		
 		System.out.println("The current instance of question is presented below, thus you can copy and redact it. Or (S)top redacting.");
 		System.out.println(question + "? " + answer0  + "!"
 										   + (answer1.isEmpty() ? "" : " " + answer1 + "!")
@@ -68,7 +68,7 @@ public class TaskObjectOpenQuestion extends TaskObject {
 				System.out.println("Wrong task format");
 				continue;
 			}
-			new TaskObjectOpenQuestion(inputString);
+			new TaskObjectVariantQuestion(inputString);
 			this.deleteObjectFromDatabase(true);
 			System.out.println("Done!");
 			break;
@@ -76,6 +76,4 @@ public class TaskObjectOpenQuestion extends TaskObject {
 		
 	}
 	
-
-
 }
