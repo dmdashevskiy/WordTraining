@@ -31,7 +31,7 @@ public class WordTraining {
 				showGreatings();
 				continue;
 			};
-			if(inputString.equals("addoq")) {					 //starts words adding process
+			if(inputString.equals("addvq")) {					 //starts words adding process
 				TaskObjectVariantQuestion.addTasksTroughConsole(true);
 				showGreatings();
 				continue;
