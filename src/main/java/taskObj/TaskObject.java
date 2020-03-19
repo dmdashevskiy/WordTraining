@@ -11,60 +11,50 @@ import java.text.SimpleDateFormat;
 public class TaskObject {
 	
 	public static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
-	final Integer MAX_REPEATS = 5;	
-	Integer ID;
-	Integer numberOfRepeats = 0;	
-	String stringRepresentation;
-	String question;
-	String answer0;
-	String answer1;
-	String answer2;	
-	Calendar nextRepeat;
+	private final Integer MAX_REPEATS = 5;	
+	private Integer ID;
+	private Integer numberOfRepeats = 0;	
 	
-	public void setID(Integer iD) {
+	private String question;
+	private String answer0;
+	private String answer1;
+	private String answer2;	
+	private Calendar nextRepeat;
+	
+	private void setID(Integer iD) {
 		this.ID = iD;
-	}
+	}	
 	
-	
-	public void setNumberOfRepeats(Integer numberOfRepeats) {
+	private void setNumberOfRepeats(Integer numberOfRepeats) {
 		this.numberOfRepeats = numberOfRepeats;
 	}
 
-
-	public void setQuestion(String question) {
+	private void setQuestion(String question) {
 		this.question = question;
 	}
-
 	
-	public void setAnswer0(String answer0) {
+	private void setAnswer0(String answer0) {
 		this.answer0 = answer0;
 	}
 
-
-	public void setAnswer1(String answer1) {
+	private void setAnswer1(String answer1) {
 		this.answer1 = answer1;
 	}
 
-
-	public void setAnswer2(String answer2) {
+	private void setAnswer2(String answer2) {
 		this.answer2 = answer2;
 	}
 
-
-	public void setNextRepeat(java.sql.Date date) {
+	private void setNextRepeat(java.sql.Date date) {
 		this.nextRepeat = Calendar.getInstance();
 		this.nextRepeat.setTime(date);
 	}
 
-
 	public TaskObject(){	
-	}
-	
+	}	
 	
 	public TaskObject(String stringRepresentation) { //creates taskObject from parsed stringRepresentation and saves it into the database
-		
-		this.stringRepresentation = stringRepresentation;
-		
+						
 		String[] stringArray = parseStringRepresentation(stringRepresentation);		
 		this.question = stringArray[0];
 		this.answer0 = stringArray[1];
@@ -250,7 +240,7 @@ public class TaskObject {
 		}			
 	}
 
-	public static String[] parseStringRepresentation(String stringRepresentation) {
+	private static String[] parseStringRepresentation(String stringRepresentation) {
 				
 		String[] returnArray = new String[4];
 		Arrays.fill(returnArray, "");
@@ -264,13 +254,11 @@ public class TaskObject {
 		return returnArray;
 	}
 
-
 	public void askQuestionTroughConsole() {
 
 		System.out.println(question);
 		
 	}
-
 
 	public boolean answerIsCorrect(String inputString) {
 		inputString = inputString.trim();
@@ -284,14 +272,12 @@ public class TaskObject {
 		}		
 	}
 
-
 	public void showCurrentTaskCondition() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
 		System.out.println(String.valueOf(numberOfRepeats) 
 							+ " from " + String.valueOf(MAX_REPEATS) 
 							+ " next repeat on " + dateFormat.format(nextRepeat.getTime()));		
 	}
-
 
 	public void sceduleNextTrainingForTheTask(boolean notFromBegining) {
 		
@@ -312,11 +298,9 @@ public class TaskObject {
 		
 	}
 
-
 	public void showAnswers() {
 		System.out.println("Correct answers is: " + answer0 + " " + answer1 + " " + answer2);		
 	}
-
 
 	public void changeQuestion() {
 
@@ -343,7 +327,6 @@ public class TaskObject {
 		}	
 		
 	}
-
 
 	public static void getTasksForTrainng(ArrayList<TaskObject> tasksForTraining) {
 		

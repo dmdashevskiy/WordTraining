@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import taskObj.TaskObject;
+import taskObj.TaskObjectOpenQuestion;
 import trainers.DailyTrainer;
 import trainers.Trainer;
 
@@ -26,7 +27,7 @@ public class WordTraining {
 				continue;
 			};
 			if(inputString.equals("addtasks")) {					 //starts words adding process
-				TaskObject.addTasksTroughConsole(true);
+				TaskObjectOpenQuestion.addTasksTroughConsole(true);
 				showGreatings();
 				continue;
 			};
