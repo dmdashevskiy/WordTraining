@@ -25,9 +25,15 @@ public class TaskObjectVariantQuestion extends TaskObject {
 		System.out.println("Choose the correct answer");
 		
 		ArrayList<String> answersList = new ArrayList<String>();
-		answersList.add(answer0);
-		answersList.add(answer1);
-		answersList.add(answer2);
+		if (!answer0.isEmpty()) {
+			answersList.add(answer0);
+		}
+		if (!answer1.isEmpty()) {
+			answersList.add(answer1);
+		}
+		if (!answer2.isEmpty()) {
+			answersList.add(answer2);
+		}		
 		Collections.shuffle(answersList);
 		
 		for (int i = 0; i < answersList.size(); i++) {

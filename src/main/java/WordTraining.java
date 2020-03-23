@@ -25,12 +25,12 @@ public class WordTraining {
 				showGreatings();
 				continue;
 			};
-			if(inputString.equals("addoq")) {					 //starts words adding process
+			if(inputString.equals("addoq")) {					 	//starts words adding process
 				TaskObject.addTasksTroughConsole(TaskType.OPEN_QUESTION, false);
 				showGreatings();
 				continue;
 			};
-			if(inputString.equals("addvq")) {					 //starts words adding process
+			if(inputString.equals("addvq")) {					 	//starts words adding process
 				TaskObject.addTasksTroughConsole(TaskType.VARIANT_QUESTION, false);
 				showGreatings();
 				continue;
