@@ -294,23 +294,9 @@ public abstract class TaskObject {
 		return returnArray;
 	}
 
-	public void askQuestionTroughConsole() {
+	public abstract void askQuestionTroughConsole(); 
 
-		System.out.println(question);
-		
-	}
-
-	public boolean answerIsCorrect(String inputString) {
-		inputString = inputString.trim();
-		if (!inputString.isEmpty() 
-				&& (inputString.equals(answer0)
-					|| inputString.equals(answer1)
-					|| inputString.equals(answer2))) {
-			return true;
-		} else {
-			return false;
-		}		
-	}
+	public abstract boolean answerIsCorrect(String inputString); 
 
 	public void showCurrentTaskCondition() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
@@ -338,9 +324,7 @@ public abstract class TaskObject {
 		
 	}
 
-	public void showAnswers() {
-		System.out.println("Correct answers is: " + answer0 + " " + answer1 + " " + answer2);		
-	}
+	public abstract void showAnswers(); 
 
 	public static void getTasksForTrainng(ArrayList<TaskObject> tasksForTraining) {
 		
