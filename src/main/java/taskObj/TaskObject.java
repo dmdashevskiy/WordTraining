@@ -307,6 +307,12 @@ public class TaskObject {
 			return;
 		}
 		
+		
+		this.nextRepeat = GregorianCalendar.getInstance();
+		this.nextRepeat.set(Calendar.HOUR_OF_DAY, 0);
+		this.nextRepeat.set(Calendar.MINUTE, 0);
+		this.nextRepeat.set(Calendar.SECOND, 0);	
+		this.nextRepeat.set(Calendar.MILLISECOND, 0);
 		nextRepeat.add(Calendar.DAY_OF_MONTH, numberOfRepeats * numberOfRepeats);		
 		updateObjectInDatabase();
 		
