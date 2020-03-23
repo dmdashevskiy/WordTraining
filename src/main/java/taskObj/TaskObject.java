@@ -3,14 +3,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
 public abstract class TaskObject {
 		
-	public static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
-	public static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
-	private final Integer MAX_REPEATS = 5;	
+	private static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
+	private static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
+	private final Integer MAX_REPEATS = 5;
+	protected TaskType taskType;
 	protected Integer ID;
 	protected Integer numberOfRepeats = 0;	
 	protected String question;
@@ -68,7 +71,64 @@ public abstract class TaskObject {
 
 	}
 
-	public abstract void changeQuestion();
+	public void changeQuestion() {
+		
+		System.out.println("The current instance of question is presented below, thus you can copy and redact it. Or (S)top redacting.");
+		System.out.println(question + "? " + answer0  + "!"
+										   + (answer1.isEmpty() ? "" : " " + answer1 + "!")
+										   + (answer2.isEmpty() ? "" : " " + answer2 + "!"));			
+		
+		@SuppressWarnings("resource")
+		Scanner skaner = new Scanner(System.in);
+		String inputString;
+		
+		while (true) {			
+			inputString = skaner.nextLine();						
+			if (inputString.equals("S")) break;
+			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
+				System.out.println("Wrong task format");
+				continue;
+			}
+			new TaskObjectOpenQuestion(inputString);
+			this.deleteObjectFromDatabase(true);
+			System.out.println("Done!");
+			break;
+		}	
+		
+	}
+	
+	public static void addTasksTroughConsole(TaskType taskType, boolean silentMode) {
+		
+		@SuppressWarnings("resource")
+		Scanner skaner = new Scanner(System.in);
+		String inputString;
+		
+		if (!silentMode) {
+			System.out.println("Enter a task in the following format or (C)hange task type stop(S)");
+			System.out.println(TASK_FORMAT_TEXT_REPRESENTATION);
+		}	
+		
+		while (true) {			
+			inputString = skaner.nextLine();						
+			if (inputString.equals("S")) break;
+			if (!Pattern.matches(TASK_FORMAT_REGEX, inputString )) { 
+				System.out.println("Wrong task format");
+				continue;
+			}
+			
+			if (taskType == TaskType.OPEN_QUESTION) {
+				new TaskObjectOpenQuestion(inputString);
+			}
+			else if (taskType == TaskType.VARIANT_QUESTION) {
+				new TaskObjectVariantQuestion(inputString);
+			}			
+			
+			if (!silentMode) {
+				System.out.println("Done!");
+			}
+			
+		}			
+	}
 	
 	protected void saveObjectInDatabaseWithNewID() {
 		
@@ -82,8 +142,8 @@ public abstract class TaskObject {
 									"ANSWER2 = ?, " + 
 									"REPEAT_NUMBER = ?, " + 
 									"LAST_REPEAT = ?, " + 
-									"NEXT_REPEAT = ?;";	
-		
+									"NEXT_REPEAT = ?," +	
+									"TASK_TYPE = ?;";	
 		try {
 			Class.forName ("org.h2.Driver");
 			connectionDatabse = DriverManager.getConnection ("jdbc:h2:~/TaskBase", "sa","123654");
@@ -94,7 +154,8 @@ public abstract class TaskObject {
 			insertObject.setString(4, this.answer2);
 			insertObject.setInt(5, numberOfRepeats);
 			insertObject.setDate(6, new java.sql.Date(0));;
-			insertObject.setDate(7, new java.sql.Date(this.nextRepeat.getTimeInMillis()));	
+			insertObject.setDate(7, new java.sql.Date(this.nextRepeat.getTimeInMillis()));
+			insertObject.setString(8, taskType.toString());	
 			insertObject.executeUpdate();	
 		
 		} catch (ClassNotFoundException e) {			
@@ -135,8 +196,8 @@ public abstract class TaskObject {
 									"REPEAT_NUMBER = ?, " + 
 									"LAST_REPEAT = ?, " + 
 									"NEXT_REPEAT = ? " +
-								"where ID = ?;";
-								
+									"TASK_TYPE = ? " +
+								"where ID = ?;";		
 		
 		try {
 			Class.forName ("org.h2.Driver");
@@ -149,7 +210,8 @@ public abstract class TaskObject {
 			udateObject.setInt(5, numberOfRepeats);
 			udateObject.setDate(6, new java.sql.Date(0));;
 			udateObject.setDate(7, new java.sql.Date(this.nextRepeat.getTimeInMillis()));
-			udateObject.setInt(8, ID);
+			udateObject.setString(8, this.taskType.toString());
+			udateObject.setInt(9, ID);
 			udateObject.executeUpdate();			
 
 		} catch (ClassNotFoundException e) {			
@@ -307,7 +369,16 @@ public abstract class TaskObject {
 			resSet = selectObject.executeQuery();
 			
 			while (resSet.next()) {
-				TaskObject readTask = new TaskObjectOpenQuestion();
+				
+				TaskObject readTask = null;
+				
+				if (resSet.getString("TASK_TYPE").equals(TaskType.OPEN_QUESTION.toString())) {
+					readTask = new TaskObjectOpenQuestion();
+				}
+				else if (resSet.getString("TASK_TYPE").equals(TaskType.VARIANT_QUESTION.toString())) {
+					readTask = new TaskObjectVariantQuestion();
+				}
+				
 				readTask.setID(resSet.getInt("ID"));
 				readTask.setQuestion(resSet.getString("QUESTION"));
 				readTask.setAnswer0(resSet.getString("ANSWER0"));

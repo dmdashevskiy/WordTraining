@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-import taskObj.TaskObjectOpenQuestion;
-import taskObj.TaskObjectVariantQuestion;
+import taskObj.*;
 import trainers.DailyTrainer;
 import trainers.Trainer;
 
@@ -27,12 +26,12 @@ public class WordTraining {
 				continue;
 			};
 			if(inputString.equals("addoq")) {					 //starts words adding process
-				TaskObjectOpenQuestion.addTasksTroughConsole(true);
+				TaskObject.addTasksTroughConsole(TaskType.OPEN_QUESTION, false);
 				showGreatings();
 				continue;
 			};
-			if(inputString.equals("addoq")) {					 //starts words adding process
-				TaskObjectVariantQuestion.addTasksTroughConsole(true);
+			if(inputString.equals("addvq")) {					 //starts words adding process
+				TaskObject.addTasksTroughConsole(TaskType.VARIANT_QUESTION, false);
 				showGreatings();
 				continue;
 			};
