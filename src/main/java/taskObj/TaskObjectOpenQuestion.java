@@ -5,6 +5,7 @@ public class TaskObjectOpenQuestion extends TaskObject {
 		public TaskObjectOpenQuestion(String inputString) {
 			super(inputString);
 			this.taskType = TaskType.OPEN_QUESTION;
+			saveObjectInDatabaseWithNewID();
 		}
 
 		public TaskObjectOpenQuestion() {

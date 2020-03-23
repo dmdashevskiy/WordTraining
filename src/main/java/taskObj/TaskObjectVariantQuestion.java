@@ -10,6 +10,7 @@ public class TaskObjectVariantQuestion extends TaskObject {
 	public TaskObjectVariantQuestion(String inputString) {
 		super(inputString);
 		this.taskType = TaskType.VARIANT_QUESTION;
+		saveObjectInDatabaseWithNewID();
 	}
 
 	public TaskObjectVariantQuestion() {

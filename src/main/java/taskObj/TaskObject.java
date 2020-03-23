@@ -65,9 +65,8 @@ public abstract class TaskObject {
 		this.nextRepeat.set(Calendar.HOUR_OF_DAY, 0);
 		this.nextRepeat.set(Calendar.MINUTE, 0);
 		this.nextRepeat.set(Calendar.SECOND, 0);	
-		this.nextRepeat.set(Calendar.MILLISECOND, 0);
+		this.nextRepeat.set(Calendar.MILLISECOND, 0);		
 		
-		saveObjectInDatabaseWithNewID();
 
 	}
 
@@ -105,6 +104,9 @@ public abstract class TaskObject {
 		
 		if (!silentMode) {
 			System.out.println("Enter a task in the following format or (C)hange task type stop(S)");
+			if (taskType == TaskType.VARIANT_QUESTION) {
+				System.out.println("The first answer will be accepted as correct!");
+			}
 			System.out.println(TASK_FORMAT_TEXT_REPRESENTATION);
 		}	
 		
@@ -119,7 +121,7 @@ public abstract class TaskObject {
 			if (taskType == TaskType.OPEN_QUESTION) {
 				new TaskObjectOpenQuestion(inputString);
 			}
-			else if (taskType == TaskType.VARIANT_QUESTION) {
+			else if (taskType == TaskType.VARIANT_QUESTION) {				
 				new TaskObjectVariantQuestion(inputString);
 			}			
 			
@@ -195,7 +197,7 @@ public abstract class TaskObject {
 									"ANSWER2 = ?, " + 
 									"REPEAT_NUMBER = ?, " + 
 									"LAST_REPEAT = ?, " + 
-									"NEXT_REPEAT = ? " +
+									"NEXT_REPEAT = ?, " +
 									"TASK_TYPE = ? " +
 								"where ID = ?;";		
 		
