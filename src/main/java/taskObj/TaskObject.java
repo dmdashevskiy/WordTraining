@@ -6,13 +6,12 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 
 public abstract class TaskObject {
 	
 	private static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
 	private static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
-	private final Integer MAX_REPEATS = 5;
+	private static final Integer MAX_REPEATS = 5;
 	protected TaskType taskType;
 	protected Integer ID;
 	protected Integer numberOfRepeats = 0;	
@@ -301,10 +300,8 @@ public abstract class TaskObject {
 	public abstract boolean answerIsCorrect(String inputString); 
 
 	public void showCurrentTaskCondition() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
-		System.out.println(String.valueOf(numberOfRepeats) 
-							+ " from " + String.valueOf(MAX_REPEATS) 
-							+ " next repeat on " + dateFormat.format(nextRepeat.getTime()));		
+
+		System.out.printf("%d from %d and next repeat on %td.%<tm.%<tY%n", numberOfRepeats, MAX_REPEATS, nextRepeat);
 	}
 
 	public void sceduleNextTrainingForTheTask(boolean notFromBegining) {
