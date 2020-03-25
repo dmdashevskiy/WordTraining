@@ -9,7 +9,11 @@ public class WordTraining {
 
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		//com 1
+=======
+		//com 2
+>>>>>>> refs/heads/recearch
 		
 		Scanner skaner = new Scanner(System.in);
 		String inputString;		
