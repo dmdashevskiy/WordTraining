@@ -9,6 +9,8 @@ public class WordTraining {
 
 	public static void main(String[] args) {
 		
+		//com 1
+		
 		Scanner skaner = new Scanner(System.in);
 		String inputString;		
 		showGreatings();
