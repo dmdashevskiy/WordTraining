@@ -9,7 +9,9 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 
 public abstract class TaskObject {
-		
+	
+	//com res
+	
 	private static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
 	private static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
 	private final Integer MAX_REPEATS = 5;
