@@ -1,7 +1,9 @@
 package taskObj;
 
 public class TaskObjectOpenQuestion extends TaskObject {
-
+		
+		//com main
+		
 		public TaskObjectOpenQuestion(String inputString) {
 			super(inputString);
 			this.taskType = TaskType.OPEN_QUESTION;
