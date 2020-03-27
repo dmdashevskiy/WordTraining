@@ -1,7 +1,7 @@
 package main;
 import java.util.Scanner;
 
-import taskObj.*;
+import taskObj.TaskObject;
 import trainers.DailyTrainer;
 import trainers.Trainer;
 
@@ -27,12 +27,12 @@ public class WordTraining {
 				continue;
 			};
 			if(inputString.equals("addoq")) {					 	//starts words adding process
-				TaskObject.addTasksTroughConsole(TaskType.OPEN_QUESTION, false);
+				TaskObject.addTasksTroughConsole(TaskObject.TaskType.OPEN_QUESTION, false);
 				showGreatings();
 				continue;
 			};
 			if(inputString.equals("addvq")) {					 	//starts words adding process
-				TaskObject.addTasksTroughConsole(TaskType.VARIANT_QUESTION, false);
+				TaskObject.addTasksTroughConsole(TaskObject.TaskType.VARIANT_QUESTION, false);
 				showGreatings();
 				continue;
 			};

@@ -411,4 +411,11 @@ public abstract class TaskObject {
 		
 	}
 	
+	public static enum TaskType {
+		
+		OPEN_QUESTION,
+		VARIANT_QUESTION	
+			
+	}
+	
 }
