@@ -8,7 +8,7 @@ import taskObj.TaskObject;
 
 public class DailyTrainer extends Trainer {
 	
-	ArrayList<TaskObject> tasksForTraining;
+	private ArrayList<TaskObject> tasksForTraining;
 	
 	public DailyTrainer() {
 		super();

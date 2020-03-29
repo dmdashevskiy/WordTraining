@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class TaskObjectVariantQuestion extends TaskObject {
 	
-	int correctVariant;
+	private int correctVariant;
 	
 	public TaskObjectVariantQuestion(String inputString) {
 		

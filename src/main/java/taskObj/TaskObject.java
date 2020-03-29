@@ -19,7 +19,7 @@ public abstract class TaskObject {
 	private String answer0;
 	private String answer1;
 	private String answer2;	
-	protected Calendar nextRepeat;
+	private Calendar nextRepeat;
 	
 	
 	private void setID(Integer iD) {
