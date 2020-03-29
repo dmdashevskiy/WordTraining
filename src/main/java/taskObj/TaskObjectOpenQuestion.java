@@ -3,28 +3,27 @@ package taskObj;
 public class TaskObjectOpenQuestion extends TaskObject {
 		
 		public TaskObjectOpenQuestion(String inputString) {
-			super(inputString);
-			this.taskType = TaskType.OPEN_QUESTION;
+			
+			super(inputString, TaskObject.TaskType.OPEN_QUESTION);			
 			saveObjectInDatabaseWithNewID();
 		}
 
 		public TaskObjectOpenQuestion() {
-			super();
-			this.taskType = TaskType.OPEN_QUESTION;
+			super(TaskObject.TaskType.OPEN_QUESTION);			
 		}
 
 		@Override
 		public void askQuestionTroughConsole() {
-			System.out.println(question);			
+			System.out.println(super.getQuestion());			
 		}
 
 		@Override
 		public boolean answerIsCorrect(String inputString) {
 			inputString = inputString.trim();
 			if (!inputString.isEmpty() 
-					&& (inputString.equals(answer0)
-						|| inputString.equals(answer1)
-						|| inputString.equals(answer2))) {
+					&& (inputString.equals(super.getAnswer0())
+						|| inputString.equals(super.getAnswer1())
+						|| inputString.equals(super.getAnswer2()))) {
 				return true;
 			} else {
 				return false;
@@ -33,6 +32,6 @@ public class TaskObjectOpenQuestion extends TaskObject {
 
 		@Override
 		public void showAnswers() {
-			System.out.println("Correct answers is: " + answer0 + " " + answer1 + " " + answer2);					
+			System.out.println("Correct answers is: " + super.getAnswer0() + " " + super.getAnswer1() + " " + super.getAnswer2());					
 		}
 }

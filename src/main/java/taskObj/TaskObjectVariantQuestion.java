@@ -8,31 +8,30 @@ public class TaskObjectVariantQuestion extends TaskObject {
 	int correctVariant;
 	
 	public TaskObjectVariantQuestion(String inputString) {
-		super(inputString);
-		this.taskType = TaskType.VARIANT_QUESTION;
+		
+		super(inputString, TaskObject.TaskType.VARIANT_QUESTION);		
 		saveObjectInDatabaseWithNewID();
 	}
 
 	public TaskObjectVariantQuestion() {
-		super();
-		this.taskType = TaskType.VARIANT_QUESTION;
+		super(TaskObject.TaskType.VARIANT_QUESTION);		
 	}
 
 	@Override
 	public void askQuestionTroughConsole() {
 		
-		System.out.println(question);
+		System.out.println(super.getQuestion());
 		System.out.println("Choose the correct answer");
 		
 		ArrayList<String> answersList = new ArrayList<String>();
-		if (!answer0.isEmpty()) {
-			answersList.add(answer0);
+		if (!super.getAnswer0().isEmpty()) {
+			answersList.add(super.getAnswer0());
 		}
-		if (!answer1.isEmpty()) {
-			answersList.add(answer1);
+		if (!super.getAnswer1().isEmpty()) {
+			answersList.add(super.getAnswer1());
 		}
-		if (!answer2.isEmpty()) {
-			answersList.add(answer2);
+		if (!super.getAnswer2().isEmpty()) {
+			answersList.add(super.getAnswer2());
 		}		
 		Collections.shuffle(answersList);
 		
@@ -40,7 +39,7 @@ public class TaskObjectVariantQuestion extends TaskObject {
 			
 			String answerFromArr = answersList.get(i);
 			
-			if (answerFromArr == answer0) {
+			if (answerFromArr == super.getAnswer0()) {
 				this.correctVariant = i;
 			}			
 			if (!answerFromArr.isEmpty()) {
@@ -63,7 +62,7 @@ public class TaskObjectVariantQuestion extends TaskObject {
 
 	@Override
 	public void showAnswers() {
-		System.out.println("Correct answers is: " + Integer.toString(correctVariant) + ") " + answer0);				
+		System.out.println("Correct answers is: " + Integer.toString(correctVariant) + ") " + super.getAnswer0());				
 	}
 	
 }

@@ -12,14 +12,15 @@ public abstract class TaskObject {
 	private static final String TASK_FORMAT_REGEX = "^.+?\\?.+?\\!";
 	private static final String TASK_FORMAT_TEXT_REPRESENTATION = "open question? answer! optional answer! optional answer!";
 	private static final Integer MAX_REPEATS = 5;
-	protected TaskType taskType;
-	protected Integer ID;
-	protected Integer numberOfRepeats = 0;	
-	protected String question;
-	protected String answer0;
-	protected String answer1;
-	protected String answer2;	
+	private TaskType taskType;
+	private Integer ID;
+	private Integer numberOfRepeats = 0;	
+	private String question;
+	private String answer0;
+	private String answer1;
+	private String answer2;	
 	protected Calendar nextRepeat;
+	
 	
 	private void setID(Integer iD) {
 		this.ID = iD;
@@ -49,12 +50,31 @@ public abstract class TaskObject {
 		this.nextRepeat = Calendar.getInstance();
 		this.nextRepeat.setTime(date);
 	}
+		
+	public String getQuestion() {
+		return question;
+	}
+		
 
-	public TaskObject(){	
-	}	
+	public String getAnswer0() {
+		return answer0;
+	}
+
+	public String getAnswer1() {
+		return answer1;
+	}
+
+	public String getAnswer2() {
+		return answer2;
+	}
+
+	public TaskObject(TaskType taskType){
+		this.taskType = taskType;
+	}
 	
-	public TaskObject(String stringRepresentation) { //creates taskObject from parsed stringRepresentation and saves it into the database
-						
+	public TaskObject(String stringRepresentation, TaskType taskType) { //creates taskObject from parsed stringRepresentation and saves it into the database
+		
+		this(taskType);				
 		String[] stringArray = parseStringRepresentation(stringRepresentation);		
 		this.question = stringArray[0];
 		this.answer0 = stringArray[1];
