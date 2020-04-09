@@ -67,6 +67,10 @@ public abstract class TaskObject {
 	public String getAnswer2() {
 		return answer2;
 	}
+	
+	public Calendar getNextRepeat() {
+		return nextRepeat;
+	}
 
 	public TaskObject(TaskType taskType){
 		this.taskType = taskType;
@@ -368,7 +372,7 @@ public abstract class TaskObject {
 		
 		String selectionString = 	"select * " + 
 									"from  TASK " + 
-									untillDate == null?  ";": "where NEXT_REPEAT <= ?;";  
+									(untillDate == null?  ";": "where NEXT_REPEAT <= ?;");  
 		
 		try {
 			Class.forName ("org.h2.Driver");

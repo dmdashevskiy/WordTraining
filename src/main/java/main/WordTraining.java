@@ -1,4 +1,7 @@
 package main;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import taskObj.TaskObject;
@@ -61,7 +64,9 @@ public class WordTraining {
 
 	private static void showAllQestions() {
 		
-		new Statistic().getTasksList().forEach(System.out::println);
+		ArrayList<TaskObject> sortedTasksList = new Statistic().getTasksList();
+		sortedTasksList.sort(Comparator.comparing(TaskObject::getNextRepeat));
+		sortedTasksList.forEach(System.out::println);
 		
 	}
 
