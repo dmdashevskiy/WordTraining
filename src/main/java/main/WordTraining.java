@@ -17,7 +17,11 @@ public class WordTraining {
 			inputString = skaner.nextLine();						
 			if(inputString.equals("quit")) break;
 			if(inputString.equals("help")) {
-				showHelp(); 										//shows command help
+				showHelp(); 										
+				continue;
+			}
+			if(inputString.equals("showtasks")) {
+				showAllQestions();										
 				continue;
 			}
 			if(inputString.equals("training")) {					//starts training process		
@@ -49,8 +53,16 @@ public class WordTraining {
 	private static void showHelp() {		
 		System.out.println("quit - exit the program");
 		System.out.println("help - shows help");
+		System.out.println("showtasks - shows all the active tasks");
 		System.out.println("training - start repeating training");
 		System.out.println("addoq - add open question tasks");
-		System.out.println("addvq - add variant question tasks");
+		System.out.println("addvq - add variant question tasks");		
 	}	
+
+	private static void showAllQestions() {
+		
+		new Statistic().getTasksList().forEach(System.out::println);
+		
+	}
+
 }

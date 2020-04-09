@@ -1,6 +1,7 @@
 package trainers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -12,8 +13,12 @@ public class DailyTrainer extends Trainer {
 	
 	public DailyTrainer() {
 		super();
-		tasksForTraining = new ArrayList<TaskObject>();		
-		TaskObject.getTasksForTrainng(tasksForTraining);
+		tasksForTraining = new ArrayList<TaskObject>();	
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 23);
+		today.set(Calendar.MINUTE, 59);
+		today.set(Calendar.SECOND, 59);
+		TaskObject.getTasks(tasksForTraining, today);
 	}
 	
 	
@@ -60,7 +65,7 @@ public class DailyTrainer extends Trainer {
 					taskObject.sceduleNextTrainingForTheTask(false);				
 				}			
 			}			
-			TaskObject.getTasksForTrainng(tasksForTraining);
+			TaskObject.getTasks(tasksForTraining, null);
 		}				
 	}
 }

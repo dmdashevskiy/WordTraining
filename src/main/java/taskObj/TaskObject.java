@@ -89,6 +89,13 @@ public abstract class TaskObject {
 
 	}
 
+	@Override
+	public String toString() {
+		
+		return String.format("%s? %s! %s! %s! - %td.%<tm.%<tY", question, answer0, answer1, answer2, nextRepeat);
+		
+	}
+
 	public void changeQuestion() {
 		
 		System.out.println("The current instance of question is presented below, thus you can copy and redact it. Or (S)top redacting.");
@@ -351,30 +358,25 @@ public abstract class TaskObject {
 
 	public abstract void showAnswers(); 
 
-	public static void getTasksForTrainng(ArrayList<TaskObject> tasksForTraining) {
+	public static void getTasks(ArrayList<TaskObject> tasksForTraining, Calendar untillDate) {
 		
-				
-		Calendar today = Calendar.getInstance();		
+					
 		ResultSet resSet = null; 
 		PreparedStatement selectObject = null;
 		Connection connectionDatabse = null;		
-		
-		today.set(Calendar.HOUR_OF_DAY, 23);
-		today.set(Calendar.MINUTE, 59);
-		today.set(Calendar.SECOND, 59);
-		today.set(Calendar.MILLISECOND, 0);
-		
 		tasksForTraining.clear();
 		
 		String selectionString = 	"select * " + 
 									"from  TASK " + 
-									"where NEXT_REPEAT <= ?;";  
+									untillDate == null?  ";": "where NEXT_REPEAT <= ?;";  
 		
 		try {
 			Class.forName ("org.h2.Driver");
 			connectionDatabse = DriverManager.getConnection ("jdbc:h2:~/TaskBase", "sa","123654");
 			selectObject = connectionDatabse.prepareStatement(selectionString);
-			selectObject.setDate(1, new java.sql.Date(today.getTimeInMillis()));	
+			if (untillDate != null) {
+				selectObject.setDate(1, new java.sql.Date(untillDate.getTimeInMillis()));
+			}				
 			resSet = selectObject.executeQuery();
 			
 			while (resSet.next()) {
