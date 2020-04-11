@@ -43,7 +43,7 @@ public class WordTraining {
 				showGreatings();
 				continue;
 			};
-			System.out.println("Sorry. Don't know this command. Try 'help' for... help");			
+			System.out.println("Sorry. Don't know this command. Try 'help' for... getting help");			
 		}
 		skaner.close();
 	}
