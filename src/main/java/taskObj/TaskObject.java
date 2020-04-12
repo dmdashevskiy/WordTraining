@@ -346,7 +346,7 @@ public abstract class TaskObject {
 				
 		if (numberOfRepeats > MAX_REPEATS) {
 			System.out.println("FINALLY! You'v done with this task! Well done.");
-			deleteObjectFromDatabase(false);
+			deleteObjectFromDatabase(true);
 			return;
 		}
 		

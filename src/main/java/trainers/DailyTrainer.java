@@ -31,7 +31,11 @@ public class DailyTrainer extends Trainer {
 		
 		
 		while (tasksForTraining.isEmpty() == false) {
-		
+			
+			Calendar today = Calendar.getInstance();
+			today.set(Calendar.HOUR_OF_DAY, 23);
+			today.set(Calendar.MINUTE, 59);
+			today.set(Calendar.SECOND, 59);
 			Collections.shuffle(tasksForTraining);
 			
 			for (TaskObject taskObject : tasksForTraining) {			
@@ -65,7 +69,7 @@ public class DailyTrainer extends Trainer {
 					taskObject.sceduleNextTrainingForTheTask(false);				
 				}			
 			}			
-			TaskObject.getTasks(tasksForTraining, null);
+			TaskObject.getTasks(tasksForTraining, today);
 		}				
 	}
 }
