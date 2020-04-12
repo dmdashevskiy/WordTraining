@@ -331,7 +331,12 @@ public abstract class TaskObject {
 	public abstract boolean answerIsCorrect(String inputString); 
 
 	public void showCurrentTaskCondition() {
-
+		
+		if (numberOfRepeats > MAX_REPEATS) {			
+			System.out.println("The task is COMPLETED!");
+			return;
+		}
+		
 		System.out.printf("%d from %d and next repeat on %td.%<tm.%<tY%n", numberOfRepeats, MAX_REPEATS, nextRepeat);
 	}
 
@@ -344,8 +349,7 @@ public abstract class TaskObject {
 			numberOfRepeats = 0;
 		}
 				
-		if (numberOfRepeats > MAX_REPEATS) {
-			System.out.println("FINALLY! You'v done with this task! Well done.");
+		if (numberOfRepeats > MAX_REPEATS) {			
 			deleteObjectFromDatabase(true);
 			return;
 		}
