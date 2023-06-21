@@ -43,7 +43,7 @@ object TestBuildConfiguration : BuildType({
         maven {
             goals = "clean test"
             coverageEngine = idea {
-                includeClasses = "src"
+                includeClasses = "main.*"
             }
         }
     }
