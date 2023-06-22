@@ -35,7 +35,7 @@ project {
 object TestBuildConfiguration : BuildType({
     name = "TestBuildConfiguration"
 
-    artifactRules = "target/surefire-reports/ParseTest.txt"
+    artifactRules = "target => what_a_target"
 
     vcs {
         root(DslContext.settingsRoot)
