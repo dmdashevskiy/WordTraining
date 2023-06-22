@@ -35,8 +35,6 @@ project {
 object TestBuildConfiguration : BuildType({
     name = "TestBuildConfiguration"
 
-    artifactRules = "target => what_a_target"
-
     vcs {
         root(DslContext.settingsRoot)
     }
