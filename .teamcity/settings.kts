@@ -48,6 +48,10 @@ object TestBuildConfiguration : BuildType({
 
     steps {
         maven {
+
+            conditions {
+                equals("Environment", "Stage")
+            }
             goals = "clean test"
             coverageEngine = idea {
                 includeClasses = "main.*"
