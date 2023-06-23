@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
@@ -56,6 +57,14 @@ object TestBuildConfiguration : BuildType({
             coverageEngine = idea {
                 includeClasses = "main.*"
             }
+        }
+        script {
+            name = "Hello"
+
+            conditions {
+                equals("Environment", "Stage")
+            }
+            scriptContent = """"echo 'hello'""""
         }
     }
 
