@@ -38,7 +38,7 @@ object TestBuildConfiguration : BuildType({
     artifactRules = "target => what_a_target"
 
     params {
-        select("Environment", "", display = ParameterDisplay.PROMPT, readOnly = true,
+        select("Environment", "", display = ParameterDisplay.PROMPT,
                 options = listOf("Stage", "Pre", "Prod"))
     }
 
