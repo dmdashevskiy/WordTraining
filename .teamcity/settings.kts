@@ -54,6 +54,7 @@ object TestBuildConfiguration : BuildType({
 
             conditions {
                 equals("Environment", "Stage")
+                equals("SirenaNotificationEnable", "true")
             }
             goals = "clean test"
             coverageEngine = idea {
