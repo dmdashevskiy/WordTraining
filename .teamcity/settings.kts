@@ -67,7 +67,13 @@ object TestBuildConfiguration : BuildType({
             conditions {
                 equals("Environment", "Stage")
             }
-            scriptContent = """"echo 'hello'""""
+            scriptContent = """
+                curl --data "{\"email\": \"%teamcity.build.triggeredBy.username%\"}" \
+                        --header "Content-Type: application/json" \
+                        --header "Token: %env.SIRENA_TOKEN%" \
+                        --request POST \
+                        "%env.SIRENA_URL%"
+            """.trimIndent()
         }
     }
 
