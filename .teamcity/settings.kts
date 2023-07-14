@@ -41,6 +41,8 @@ object TestBuildConfiguration : BuildType({
     params {
         select("Environment", "", display = ParameterDisplay.PROMPT,
                 options = listOf("Stage", "Pre", "Prod"))
+        checkbox("SirenaNotificationEnable", "true", label = "Sirena notification enabled", description = "Wether notificate to it-info chanel wia Sirena",
+                  checked = "true", unchecked = "false")
     }
 
     vcs {
