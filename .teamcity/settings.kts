@@ -63,6 +63,7 @@ object TestBuildConfiguration : BuildType({
         }
         script {
             name = "Hello"
+            executionMode = BuildStep.ExecutionMode.ALWAYS
 
             conditions {
                 equals("Environment", "Stage")
